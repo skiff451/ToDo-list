@@ -1,28 +1,34 @@
+import classNames from "classnames";
 import { useDispatch } from "react-redux";
 import { removeListItem, toggleDone } from "../../redux/actionCreators";
-export default function Item({id, text, date, isDone}: IListItem) {
-  
-  const dispatch = useDispatch();
+import "./index.scss";
+import bin from "./remove.svg";
 
+export default function Item({ id, text, date, isDone }: IListItem) {
+  const dispatch = useDispatch();
+  
+  const doneStyles = classNames("item", { done: isDone });
+  
   return (
-    <div className="item-wrapper">
-      <div
-        className="item"
+    <div
+      className={doneStyles}
+      onClick={() => {
+        dispatch(toggleDone(id));
+      }}
+    >
+      <div className="text-wrapper">
+        <span className="date">{date}</span>
+        <div className="text">{text}</div>
+      </div>
+
+      <span
+        className="remove-btn"
         onClick={() => {
-          dispatch(toggleDone(id));
+          dispatch(removeListItem(id));
         }}
       >
-        <p className="text">{text}</p>
-        <span className="date">{date}</span>
-        <button
-          className="remove-btn"
-          onClick={() => {
-            dispatch(removeListItem(id));
-          }}
-        >
-          <img src="" alt="remove ico" className="remove-ico" />
-        </button>
-      </div>
+        <img src={bin} alt="remove ico" className="remove-ico" />
+      </span>
     </div>
   );
 }

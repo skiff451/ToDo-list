@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { sortAll, sortDone, sortNotDone } from "../../redux/actionCreators";
+import "./index.scss";
 
 export default function FilterConsole({ list }: FilterConsoleProps) {
   const [filterState, setFilterState] = useState({
@@ -22,7 +23,8 @@ export default function FilterConsole({ list }: FilterConsoleProps) {
 
   return (
     <div className="filter-console">
-      <button
+      <span
+        className="all-btn"
         onClick={() => {
           setFilterState({
             all: true,
@@ -32,8 +34,9 @@ export default function FilterConsole({ list }: FilterConsoleProps) {
         }}
       >
         all
-      </button>
-      <button
+      </span>
+      <span
+        className="done-btn"
         onClick={() => {
           setFilterState({
             all: false,
@@ -43,8 +46,9 @@ export default function FilterConsole({ list }: FilterConsoleProps) {
         }}
       >
         done
-      </button>
-      <button
+      </span>
+      <span
+        className="not-done-btn"
         onClick={() => {
           setFilterState({
             all: false,
@@ -54,7 +58,7 @@ export default function FilterConsole({ list }: FilterConsoleProps) {
         }}
       >
         not done
-      </button>
+      </span>
     </div>
   );
 }

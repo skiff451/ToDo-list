@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { searchItem, sortAll } from "../../redux/actionCreators";
-
 interface SearchConsoleProps {
   list: IListItem[];
 }

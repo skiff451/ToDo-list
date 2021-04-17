@@ -19,10 +19,6 @@ interface IAction{
   value: V|V[];
 }
 
-// interface IListAction {
-//   type: string;
-//   value: IListItem;
-// }
 
 interface IListProps {
   items: IListItem[];
