@@ -14,6 +14,16 @@ export default function AddConsole() {
         value={value}
         placeholder="write your to-do"
         onChange={(e) => setValue(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') {
+            if (value.trim() !== "") {
+              dispatch(addListItem(value));
+              setValue("");
+            } else {
+              console.log("empty value");
+            }
+          }
+        }}
       />
       <span
         className="add-btn"
