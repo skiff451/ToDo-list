@@ -1,9 +1,7 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchItem, sortAll } from "../../redux/actionCreators";
-interface SearchConsoleProps {
-  list: IListItem[];
-}
 
 export default function SearchConsole({ list }: SearchConsoleProps) {
   const dispatch = useDispatch();
@@ -15,15 +13,13 @@ export default function SearchConsole({ list }: SearchConsoleProps) {
   }, [value]);
 
   return (
-    <>
-      <input
-        type="text"
-        value={value}
-        placeholder="type here to search"
-        onChange={(e) => {
-          setValue(e.target.value);
-        }}
-      />
-    </>
+    <input
+      type="text"
+      value={value}
+      placeholder="type here to search"
+      onChange={(e) => {
+        setValue(e.target.value);
+      }}
+    />
   );
 }

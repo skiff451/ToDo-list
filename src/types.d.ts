@@ -5,20 +5,15 @@ interface IListItem {
   isDone: boolean;
 }
 
-interface IState {
-  list: IListItem[];
-}
-
 interface ICombinedState {
-  filterReducer: IState;
-  listReducer: IState;
+  filteredList: IListItem[];
+  list: IListItem[];
 }
 
 interface IAction{
   type: string;
   value: V|V[];
 }
-
 
 interface IListProps {
   items: IListItem[];
@@ -31,4 +26,8 @@ interface FilterConsoleProps{
 interface ISearchAction {
   type: string;
   value: string;
+}
+
+interface SearchConsoleProps {
+  list: IListItem[];
 }

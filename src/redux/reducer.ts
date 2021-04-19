@@ -7,57 +7,42 @@ import {
   SORT_NOT_DONE_ITEMS,
   TOGGLE_DONE,
   SEARCH_ITEMS,
-} from "./actions";
-import InitialState from "./initialState";
+} from "./actionsTypes";
+import initialState from "./initialState";
 
-function listReducer(state: IState = InitialState, action: IAction) {
+function list(state: IListItem[] = initialState, action: IAction) {
   switch (action.type) {
     case ADD_LIST_ITEM:
-      return { ...state, list: state.list.concat(action.value) };
+      return [...state, action.value];
     case REMOVE_LIST_ITEM:
-      return {
-        ...state,
-        list: state.list.filter((listItem) => listItem.id !== action.value as number),
-      };
+      return (state = state.filter((listItem) => listItem.id !== action.value));
     case TOGGLE_DONE:
-      return {
-        ...state,
-        list: state.list.map((listItem) => {
-          if (listItem.id === action.value as number) {
-            listItem.isDone = !listItem.isDone;
-          }
-          return listItem;
-        }),
-      };
+      return (state = state.map((listItem) => {
+        if (listItem.id === (action.value)) {
+          listItem.isDone = !listItem.isDone;
+        }
+        return listItem;
+      }));
     default:
       return state;
   }
 }
 
-function filterReducer(state: IState = InitialState, action: IAction) {
+function filteredList(state: IListItem[] = [], action: IAction) {
   switch (action.type) {
     case SORT_ALL_ITEMS:
-      return { ...state, list: action.value };
+      return (state = action.value);
     case SORT_DONE_ITEMS:
-      return {
-        ...state,
-        list: action.value.filter((item: IListItem) => item.isDone),
-      };
+      return (state = action.value.filter((item: IListItem) => item.isDone));
     case SORT_NOT_DONE_ITEMS:
-      return {
-        ...state,
-        list: action.value.filter((item: IListItem) => !item.isDone),
-      };
+      return (state = action.value.filter((item: IListItem) => !item.isDone));
     case SEARCH_ITEMS:
-      return {
-        ...state,
-        list: state.list.filter(
-          (item) => item.text.search(action.value as string) >= 0
-        ),
-      };
+      return (state = state.filter(
+        (item) => item.text.search(action.value) >= 0
+      ));
     default:
       return state;
   }
 }
 
-export default combineReducers({ filterReducer, listReducer });
+export default combineReducers({ filteredList, list });

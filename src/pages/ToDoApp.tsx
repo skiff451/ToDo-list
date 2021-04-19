@@ -7,23 +7,21 @@ import "../index.scss";
 
 export default function App() {
   const state = useSelector((state: ICombinedState) => state);
-  const { listReducer, filterReducer } = state;
-  const currentList = listReducer.list;
-  const activeList = filterReducer.list;
-
+  const { list, filteredList } = state;
+ 
   return (
     <div className="app">
       <div className="todo">
         <h1>TO DO LIST</h1>
         <div className="filter-group">
-          <SearchConsole list={currentList} />
+          <SearchConsole list={list} />
           <div className="filters">
-            <FilterConsole list={currentList} />
+            <FilterConsole list={list} />
           </div>
         </div>
         <div className="content">
           <AddConsole />
-          <List items={activeList} />
+          <List items={filteredList} />
         </div>
       </div>
     </div>
